@@ -89,7 +89,10 @@
 var root = Math.floor(Math.random() * 3);
 var imgPlay = document.querySelector('div.wrap');
 var btn = document.getElementsByTagName('button');
-
+var reset = document.querySelector('input');
+reset.onclick = () => {
+  location.reload();
+}
 console.log(root);
 var imgUser = document.getElementById('user');
 var imgRoot = document.getElementById('root');
