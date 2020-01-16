@@ -238,8 +238,13 @@ if(checkW){
   }
 
 }
-else {
+else { 
+    if(!isNaN(localStorage.clickcount)){
      document.getElementById("result").innerHTML = 'điểm của bạn vẫn là ' + localStorage.clickcount
+    }
+    else{
+        document.getElementById("result").innerHTML = 'điểm của bạn vẫn là 0'
+    }
 }
 }
 }
