@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
+    	*{
+    		margin: 0px;
+    		padding: 0px;
+    	}
         div.wrap {
             margin: 100px auto;
             width: 400px;
@@ -63,7 +67,8 @@
             color: green;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 14px;
+            padding-top: 10px;
         }
     </style>
 </head>
@@ -84,7 +89,7 @@
             <h3></h3>
         </div>
         <div>
-            <p id="result">Mời Bạn Xuất Chiêu</p>
+            <p id="result">Mời Bạn Xuất Chiêu <strong id="diem"></strong></p>
         </div>
         <div class="wrap">
             <div class="img">
@@ -113,10 +118,12 @@
             var reset = document.querySelector('input');
             var checkW = null;
             var w = 0;
+            var diem = document.getElementById('diem');
+            console.log(diem)
             reset.onclick = () => {
                 location.reload();
             }
-            var diem = 'diem';
+            
             // var dataDiem = localStorage.getItem(diem);
             console.log(root);
             var imgUser = document.getElementById('user');
@@ -172,11 +179,12 @@
                                 result = "Hòa Nhau";
                                 tb.innerHTML = result;
                                 imgUser.src = imgArr[0];
+                                checkW = 0;
                             } else if (typee == '1') {
                                 imgUser.src = imgArr[1];
                                 result = " máy chọn búa bạn đã thắng";
                                 count++;
-                                checkW = true;
+                                checkW = 1;
                                 console.log(count)
                                 tb.innerHTML = result;
                                 console.log(' máy chọn búa bạn đã thắng');
@@ -185,6 +193,7 @@
                                 result = "máy chọn búa bạn đã thua";
                                 console.log('máy chọn búa bạn đã thua');
                                 tb.innerHTML = result;
+                                checkW = 2;
                             }
                         } else if (checkR == 1) {
                             imgRoot.src = imgArr[1];
@@ -192,16 +201,18 @@
                                 imgUser.src = imgArr[1];
                                 console.log('hòa nhau');
                                 result = "Hòa Nhau";
+                                checkW = 0;
                                 tb.innerHTML = result;
                             } else if (typee == '0') {
                                 imgUser.src = imgArr[0];
                                 result = "máy chọn bao bạn đã thua"
                                 console.log(' máy chọn bao bạn đã thua');
                                 tb.innerHTML = result;
+                                checkW = 2;
                             } else if (typee == '2') {
                                 imgUser.src = imgArr[2];
                                 result = "máy chọn bao bạn đã thắng"
-                                checkW = true;
+                                checkW = 1;
                                 count++;
                                 console.log(count)
                                 console.log('máy chọn bao bạn đã thắng');
@@ -214,10 +225,11 @@
                                 console.log('hòa nhau');
                                 result = "Hòa Nhau";
                                 tb.innerHTML = result;
+                                checkW = 0;
                             } else if (typee == '0') {
                                 imgUser.src = imgArr[0];
                                 result = "máy chọn kéo bạn đã thắng";
-                                checkW = true;
+                                checkW = 1;
                                 count++;
                                 console.log(count)
                                 console.log('máy chọn kéo bạn đã thắng')
@@ -227,25 +239,44 @@
                                 result = "máy chọn kéo bạn đã thua"
                                 console.log('máy chọn kéo bạn đã thua');
                                 tb.innerHTML = result;
+                                checkW = 2;
                             }
                         }
-                        if (checkW) {
+                        if (checkW == 2) {
+                            if (typeof(Storage) !== "undefined") {
+                                if (localStorage.clickcount) {
+                                    localStorage.clickcount = Number(localStorage.clickcount) - 1;
+                                } else {
+                                    localStorage.clickcount = 1;
+                                }
+                                document.getElementById("result").innerHTML = "điểm của bạn bị trừ đi 1 hiện là " + localStorage.clickcount
+                               // document.getElementById("diem").innerText = localStorage.clickcount;
+                            } else {
+                                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+                            }
+
+                        }
+                         else if (checkW == 1) {
                             if (typeof(Storage) !== "undefined") {
                                 if (localStorage.clickcount) {
                                     localStorage.clickcount = Number(localStorage.clickcount) + 1;
                                 } else {
                                     localStorage.clickcount = 1;
                                 }
-                                document.getElementById("result").innerHTML = "điểm của bạn Là " + localStorage.clickcount;
+                                document.getElementById("result").innerHTML = "điểm của bạn Là được cộng thêm 1 hiện là  " + localStorage.clickcount
+                                // document.getElementById("diem").innerText = localStorage.clickcount;
                             } else {
                                 document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
                             }
 
-                        } else {
+                        } 
+                        else {
                             if (!isNaN(localStorage.clickcount)) {
-                                document.getElementById("result").innerHTML = 'điểm của bạn vẫn là ' + localStorage.clickcount
+                                document.getElementById("result").innerHTML = 'điểm của bạn vẫn là ' + localStorage.clickcount;
+                                // document.getElementById("diem").innerText = localStorage.clickcount;
                             } else {
-                                document.getElementById("result").innerHTML = 'điểm của bạn vẫn là 0'
+                                document.getElementById("result").innerHTML = 'điểm của bạn vẫn là '+ localStorage.clickcount
+                                // document.getElementById("diem").innerText = localStorage.clickcount;
                             }
                         }
                     }
