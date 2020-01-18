@@ -146,10 +146,10 @@
             for (i = 0; i < btn.length; i++) {
 
                 btn[i].onclick = function() {
-                    console.log(count);
+                    
                     imgPlay.style.opacity = '1';
                     var typee = this.getAttribute("data-value");
-                    console.log(typee)
+                    
                     btn[0].onclick = function() {
                         btn[1].disabled = 'true'
                         btn[2].disabled = 'true'
@@ -191,7 +191,7 @@
                             } else if (typee == '2') {
                                 imgUser.src = imgArr[2];
                                 result = "máy chọn búa bạn đã thua";
-                                console.log('máy chọn búa bạn đã thua');
+                                
                                 tb.innerHTML = result;
                                 checkW = 2;
                             }
@@ -199,14 +199,14 @@
                             imgRoot.src = imgArr[1];
                             if (typee == '1') {
                                 imgUser.src = imgArr[1];
-                                console.log('hòa nhau');
+                                
                                 result = "Hòa Nhau";
                                 checkW = 0;
                                 tb.innerHTML = result;
                             } else if (typee == '0') {
                                 imgUser.src = imgArr[0];
                                 result = "máy chọn bao bạn đã thua"
-                                console.log(' máy chọn bao bạn đã thua');
+                                
                                 tb.innerHTML = result;
                                 checkW = 2;
                             } else if (typee == '2') {
@@ -214,7 +214,7 @@
                                 result = "máy chọn bao bạn đã thắng"
                                 checkW = 1;
                                 count++;
-                                console.log(count)
+                               
                                 console.log('máy chọn bao bạn đã thắng');
                                 tb.innerHTML = result;
                             }
@@ -231,7 +231,7 @@
                                 result = "máy chọn kéo bạn đã thắng";
                                 checkW = 1;
                                 count++;
-                                console.log(count)
+                                
                                 console.log('máy chọn kéo bạn đã thắng')
                                 tb.innerHTML = result;
                             } else if (typee == '1') {
